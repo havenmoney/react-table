@@ -1,7 +1,7 @@
 {
-  "name": "react-table",
+  "name": "@havenmoney/react-table",
   "version": "6.10.0",
-  "description": "A fast, lightweight, opinionated table and datagrid built on React",
+  "description": "A fast, lightweight, opinionated table and datagrid built on React. Forked for Haven Money.",
   "license": "MIT",
   "homepage": "https://github.com/react-tools/react-table#readme",
   "repository": {

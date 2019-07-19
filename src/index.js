@@ -865,7 +865,17 @@ export default class ReactTable extends Methods(Lifecycle(Component)) {
       </div>
     )
 
+    const tableComponentBuilders = {
+      makeHeaderGroups,
+      makeHeaders,
+      makeFilters,
+      makePageRow,
+      makePadRow,
+      makeColumnFooters,
+      makePagination,
+    }
+
     // childProps are optionally passed to a function-as-a-child
-    return children ? children(finalState, makeTable, this) : makeTable()
+    return children ? children(finalState, makeTable, this, tableComponentBuilders) : makeTable()
   }
 }
