@@ -142,26 +142,26 @@ export default class ReactTable extends Methods(Lifecycle(Component)) {
     const hasColumnFooter = allVisibleColumns.some(d => d.Footer)
     const hasFilters = filterable || allVisibleColumns.some(d => d.filterable)
 
-    const recurseRowsViewIndex = (rows, path = [], index = -1) => [
-      rows.map((row, i) => {
-        index += 1
-        const rowWithViewIndex = {
-          ...row,
-          _viewIndex: index,
-        }
-        const newPath = path.concat([i])
-        if (rowWithViewIndex[subRowsKey] && _.get(expanded, newPath)) {
-          [rowWithViewIndex[subRowsKey], index] = recurseRowsViewIndex(
-            rowWithViewIndex[subRowsKey],
-            newPath,
-            index
-          )
-        }
-        return rowWithViewIndex
-      }),
-      index,
-    ];
-    [pageRows] = recurseRowsViewIndex(pageRows)
+    // const recurseRowsViewIndex = (rows, path = [], index = -1) => [
+    //   rows.map((row, i) => {
+    //     index += 1
+    //     const rowWithViewIndex = {
+    //       ...row,
+    //       _viewIndex: index,
+    //     }
+    //     const newPath = path.concat([i])
+    //     if (rowWithViewIndex[subRowsKey] && _.get(expanded, newPath)) {
+    //       [rowWithViewIndex[subRowsKey], index] = recurseRowsViewIndex(
+    //         rowWithViewIndex[subRowsKey],
+    //         newPath,
+    //         index
+    //       )
+    //     }
+    //     return rowWithViewIndex
+    //   }),
+    //   index,
+    // ];
+    // [pageRows] = recurseRowsViewIndex(pageRows)
 
     const canPrevious = page > 0
     const canNext = page + 1 < pages
@@ -482,7 +482,7 @@ export default class ReactTable extends Methods(Lifecycle(Component)) {
       return (
         <TrGroupComponent key={rowInfo.nestingPath.join('_')} {...trGroupProps}>
           <TrComponent
-            className={classnames(trProps.className, row._viewIndex % 2 ? '-even' : '-odd')}
+            className={classnames(trProps.className, rowInfo.viewIndex % 2 ? '-even' : '-odd')}
             style={trProps.style}
             {...trProps.rest}
           >
