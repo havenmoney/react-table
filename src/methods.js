@@ -239,17 +239,19 @@ export default Base =>
       }
 
       // // If the data hasn't changed, just use the cached data
-      let resolvedData = this.resolvedData
+      let maybeCachedResolvedData = this.resolvedData
       // If the data has changed, run the data resolver and cache the result
       if (!this.resolvedData || dataChanged) {
-        resolvedData = resolveData(data)
-        this.resolvedData = resolvedData
+        maybeCachedResolvedData = resolveData(data);
+        this.resolvedData = maybeCachedResolvedData;
       }
 
-      let rdIndex = resolvedData.length;
+      let resolvedData = [];
+      let rdIndex = maybeCachedResolvedData.length;
+      const staticLastIndex = maybeCachedResolvedData.length - 1;
       while (rdIndex--) {
-        const op = resolvedData[rdIndex];
-        resolvedData[rdIndex] = accessRow(op, rdIndex)
+        const op = resolvedData[staticLastIndex - rdIndex];
+        resolvedData.push(accessRow(op, rdIndex));
       }
 
       // // Use the resolved data
