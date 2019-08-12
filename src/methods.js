@@ -245,8 +245,15 @@ export default Base =>
         resolvedData = resolveData(data)
         this.resolvedData = resolvedData
       }
-      // Use the resolved data
-      resolvedData = resolvedData.map((d, i) => accessRow(d, i))
+
+      let rdIndex = resolvedData.length;
+      while (rdIndex--) {
+        const op = resolvedData[rdIndex];
+        resolvedData[rdIndex] = accessRow(op, rdIndex)
+      }
+
+      // // Use the resolved data
+      // resolvedData = resolvedData.map((d, i) => accessRow(d, i))
 
       // TODO: Make it possible to fabricate nested rows without pivoting
       const aggregatingColumns = allVisibleColumns.filter(d => !d.expander && d.aggregate)
