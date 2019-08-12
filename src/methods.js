@@ -250,8 +250,9 @@ export default Base =>
       let rdIndex = maybeCachedResolvedData.length;
       const staticLastIndex = maybeCachedResolvedData.length - 1;
       while (rdIndex--) {
-        const op = resolvedData[staticLastIndex - rdIndex];
-        resolvedData.push(accessRow(op, rdIndex));
+        const internalIndex = staticLastIndex - rdIndex;
+        const op = resolvedData[internalIndex];
+        resolvedData.push(accessRow(op, internalIndex));
       }
 
       // // Use the resolved data
